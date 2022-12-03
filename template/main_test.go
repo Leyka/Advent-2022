@@ -1,0 +1,23 @@
+package main
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+const INPUT = ``
+
+func TestPart1(t *testing.T) {
+	result := part1(INPUT)
+	expected := 0
+
+	assert.Equal(t, expected, result)
+}
+
+func TestPart2(t *testing.T) {
+	result := part2(INPUT)
+	expected := 0
+
+	assert.Equal(t, expected, result)
+}
