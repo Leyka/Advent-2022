@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
 func ReadFile(filename string) string {
@@ -18,4 +19,11 @@ func ReadFile(filename string) string {
 	}
 
 	return inputContent
+}
+
+func ReadFileLines(filename string) []string {
+	inputContent := ReadFile(filename)
+	contentTrimmed := strings.TrimSpace(inputContent)
+
+	return strings.Split(contentTrimmed, "\n")
 }

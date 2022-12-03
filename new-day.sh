@@ -18,17 +18,17 @@ import (
 )
 
 func main() {
-	input := utils.ReadFile("input.txt")
+	lines := utils.ReadFileLines("input.txt")
 
-	fmt.Println("part1:", part1(input))
-	fmt.Println("part2:", part2(input))
+	fmt.Println("part1:", part1(lines))
+	fmt.Println("part2:", part2(lines))
 }
 
-func part1(input string) int {
+func part1(lines []string) int {
 	return 0
 }
 
-func part2(input string) int {
+func part2(lines []string) int {
 	return 0
 }
 
@@ -38,24 +38,27 @@ cat > "$new_day_dirname/main_test.go" <<EOF
 package main
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-const INPUT = \`
-
-\`
+const INPUT = \`\`
 
 func TestPart1(t *testing.T) {
-	result := part1(INPUT)
+	lines := strings.Split(INPUT, "\n")
+
+	result := part1(lines)
 	expected := 0
 
 	assert.Equal(t, expected, result)
 }
 
 func TestPart2(t *testing.T) {
-	result := part2(INPUT)
+	lines := strings.Split(INPUT, "\n")
+
+	result := part2(lines)
 	expected := 0
 
 	assert.Equal(t, expected, result)
