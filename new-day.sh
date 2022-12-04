@@ -19,9 +19,10 @@ import (
 
 func main() {
 	lines := utils.ReadFileLines("input.txt")
+	cleanLines := utils.RemoveEmptyStringFromArray(lines)
 
-	fmt.Println("part1:", part1(lines))
-	fmt.Println("part2:", part2(lines))
+	fmt.Println("part1:", part1(cleanLines))
+	fmt.Println("part2:", part2(cleanLines))
 }
 
 func part1(lines []string) int {
