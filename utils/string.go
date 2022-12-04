@@ -2,8 +2,6 @@ package utils
 
 import (
 	"strings"
-
-	"golang.org/x/exp/slices"
 )
 
 func FindCommonLetters(words []string, unique bool) []string {
@@ -24,7 +22,7 @@ func FindCommonLetters(words []string, unique bool) []string {
 		}
 
 		if common {
-			if slices.Contains(commonLetters, string(letter)) && unique {
+			if ArrayContains(&commonLetters, string(letter)) && unique {
 				continue
 			}
 
