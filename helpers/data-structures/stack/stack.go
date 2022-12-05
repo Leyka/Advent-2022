@@ -7,7 +7,7 @@ import (
 type Stack[T any] []T
 
 // Stack implementation (LIFO). Not thread-safe.
-func NewStack[T any]() *Stack[T] {
+func New[T any]() *Stack[T] {
 	return &Stack[T]{}
 }
 

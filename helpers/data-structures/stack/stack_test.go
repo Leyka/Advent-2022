@@ -7,7 +7,7 @@ import (
 )
 
 func TestPush(t *testing.T) {
-	s := NewStack[int]()
+	s := New[int]()
 	s.Push(10)
 	s.Push(20)
 	s.Push(30)
@@ -17,7 +17,7 @@ func TestPush(t *testing.T) {
 }
 
 func TestPop(t *testing.T) {
-	s := NewStack[string]()
+	s := New[string]()
 	s.Push("hello")
 	s.Push("world")
 
@@ -34,7 +34,7 @@ func TestPop(t *testing.T) {
 }
 
 func TestIsEmpty(t *testing.T) {
-	s := NewStack[int]()
+	s := New[int]()
 	assert.True(t, s.IsEmpty())
 
 	s.Push(1)

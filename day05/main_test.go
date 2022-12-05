@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -18,18 +17,14 @@ move 2 from 2 to 1
 move 1 from 1 to 2`
 
 func TestPart1(t *testing.T) {
-	lines := strings.Split(INPUT, "\n")
-
-	result := part1(lines)
-	expected := 0
+	result := part1(INPUT)
+	expected := "CMZ"
 
 	assert.Equal(t, expected, result)
 }
 
 func TestPart2(t *testing.T) {
-	lines := strings.Split(INPUT, "\n")
-
-	result := part2(lines)
+	result := part2(INPUT)
 	expected := 0
 
 	assert.Equal(t, expected, result)
