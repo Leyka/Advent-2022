@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/Leyka/Advent-2022/utils"
+	"github.com/Leyka/Advent-2022/helpers/utils"
 )
 
 func main() {
