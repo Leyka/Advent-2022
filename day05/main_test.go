@@ -25,7 +25,7 @@ func TestPart1(t *testing.T) {
 
 func TestPart2(t *testing.T) {
 	result := part2(INPUT)
-	expected := 0
+	expected := "MCD"
 
 	assert.Equal(t, expected, result)
 }

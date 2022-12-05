@@ -16,6 +16,8 @@ type Move struct {
 	to       int
 }
 
+type MoveFn func(Move, *[]*stack.Stack[string])
+
 func main() {
 	raw := utils.ReadFile("input.txt")
 
@@ -24,21 +26,52 @@ func main() {
 }
 
 func part1(lines string) string {
+	moveFn := func(move Move, cratesArray *[]*stack.Stack[string]) {
+		from := move.from - 1
+		to := move.to - 1
+
+		for i := 0; i < move.quantity; i++ {
+			letter, _ := (*cratesArray)[from].Pop()
+			(*cratesArray)[to].Push(letter)
+		}
+	}
+
+	return solve(lines, moveFn)
+}
+
+func part2(lines string) string {
+	moveFn := func(move Move, cratesArray *[]*stack.Stack[string]) {
+		from := move.from - 1
+		to := move.to - 1
+		var lettersCombo []string
+
+		for i := 0; i < move.quantity; i++ {
+			letter, _ := (*cratesArray)[from].Pop()
+			lettersCombo = append(lettersCombo, letter)
+		}
+
+		for i := len(lettersCombo) - 1; i >= 0; i-- {
+			letter := lettersCombo[i]
+			(*cratesArray)[to].Push(letter)
+		}
+	}
+
+	return solve(lines, moveFn)
+}
+
+func solve(lines string, fn MoveFn) string {
 	rawSplit := strings.Split(lines, "\n\n")
 	crates := strings.Split(rawSplit[0], "\n")
 	cratesArray := mapCrates(crates)
-
 	moves := strings.Split(rawSplit[1], "\n")
+
 	for _, move := range moves {
 		if move == "" {
 			continue
 		}
 
 		move := parseMove(move)
-		for i := 0; i < move.quantity; i++ {
-			letter, _ := cratesArray[move.from-1].Pop()
-			cratesArray[move.to-1].Push(letter)
-		}
+		fn(move, &cratesArray)
 	}
 
 	answer := ""
@@ -46,19 +79,12 @@ func part1(lines string) string {
 		letter, _ := crate.Pop()
 		answer += letter
 	}
-
 	return answer
 }
 
-func part2(lines string) int {
-	return 0
-}
-
 func mapCrates(crateLines []string) []*stack.Stack[string] {
-
 	lastLine := crateLines[len(crateLines)-1]
 	nbCrates, _ := strconv.Atoi(lastLine[len(lastLine)-1:])
-
 	cratesArray := make([]*stack.Stack[string], nbCrates)
 
 	// Start from the bottom
