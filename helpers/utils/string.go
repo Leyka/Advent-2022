@@ -49,3 +49,16 @@ func RemoveEmptyStringFromArray(array []string) []string {
 
 	return result
 }
+
+func HasUniqueChars(word string) bool {
+	chars := []string{}
+	for _, char := range word {
+		if ArrayContains(&chars, string(char)) {
+			return false
+		}
+
+		chars = append(chars, string(char))
+	}
+
+	return true
+}

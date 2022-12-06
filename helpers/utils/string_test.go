@@ -25,3 +25,11 @@ func TestRemoveEmptyStringFromArray(t *testing.T) {
 	assert.Equal(t, []string{"a"}, RemoveEmptyStringFromArray([]string{"a", " ", "  ", "   "}))
 	assert.Equal(t, []string{"a", "b"}, RemoveEmptyStringFromArray([]string{"a", " ", "  ", "b", "   "}))
 }
+
+func TestHasUniqueChars(t *testing.T) {
+	assert.True(t, HasUniqueChars("abc"))
+	assert.False(t, HasUniqueChars("abcc"))
+	assert.True(t, HasUniqueChars("ab"))
+	assert.False(t, HasUniqueChars("AhelloA"))
+	assert.True(t, HasUniqueChars(""))
+}

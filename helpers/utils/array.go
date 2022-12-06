@@ -1,5 +1,6 @@
 package utils
 
+// O(N)
 func ArrayContains[T comparable](array *[]T, objToFind T) bool {
 	for _, item := range *array {
 		if item == objToFind {
