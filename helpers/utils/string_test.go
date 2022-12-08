@@ -33,3 +33,9 @@ func TestHasUniqueChars(t *testing.T) {
 	assert.False(t, HasUniqueChars("AhelloA"))
 	assert.True(t, HasUniqueChars(""))
 }
+
+func TestReverse(t *testing.T) {
+	assert.Equal(t, "", StringReverse(""))
+	assert.Equal(t, "Abc", StringReverse("cbA"))
+	assert.Equal(t, "Hello~World 123", StringReverse(StringReverse("Hello~World 123")))
+}

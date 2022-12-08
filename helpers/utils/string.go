@@ -62,3 +62,18 @@ func HasUniqueChars(word string) bool {
 
 	return true
 }
+
+func StringReverse(s string) string {
+	if len(s) == 0 {
+		return ""
+	}
+
+	n := len(s)
+	runes := []rune(s)
+	for _, rune := range s {
+		n--
+		runes[n] = rune
+	}
+
+	return string(runes[n:])
+}
