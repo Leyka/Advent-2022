@@ -10,6 +10,8 @@ import (
 	"github.com/Leyka/Advent-2022/helpers/utils"
 )
 
+type ComputeFn func(*node.Node, int) int
+
 func main() {
 	lines := utils.ReadFileLines("input.txt")
 	cleanLines := utils.RemoveEmptyStringFromArray(lines)
@@ -20,24 +22,17 @@ func main() {
 
 func part1(lines []string) int {
 	root := buildFolderStructure(lines)
-	return solvePart1(root, 0)
-}
 
-func solvePart1(node *node.Node, sum int) int {
-	threshold := 100_000
-
-	if node.HasChildren() {
+	compute := func(node *node.Node, sum int) int {
 		value := node.ComputeValue()
-		if value <= threshold {
+		if value <= 100_000 {
 			sum += value
 		}
 
-		for _, child := range node.Children {
-			sum = solvePart1(child, sum)
-		}
+		return sum
 	}
 
-	return sum
+	return solve(root, 0, compute)
 }
 
 func part2(lines []string) int {
@@ -45,22 +40,27 @@ func part2(lines []string) int {
 	totalUsedSpace := root.ComputeValue()
 	target := 30_000_000 - (70_000_000 - totalUsedSpace)
 
-	return solvePart2(root, target, math.MaxInt)
-}
-
-func solvePart2(node *node.Node, target int, minCandidate int) int {
-	if node.HasChildren() {
+	compute := func(node *node.Node, min int) int {
 		value := node.ComputeValue()
-		if value >= target && value < minCandidate {
-			minCandidate = value
+		if value >= target && value < min {
+			min = value
 		}
 
+		return min
+	}
+
+	return solve(root, math.MaxInt32, compute)
+}
+
+func solve(node *node.Node, acc int, compute ComputeFn) int {
+	if node.HasChildren() {
+		acc = compute(node, acc)
 		for _, child := range node.Children {
-			minCandidate = solvePart2(child, target, minCandidate)
+			acc = solve(child, acc, compute)
 		}
 	}
 
-	return minCandidate
+	return acc
 }
 
 func buildFolderStructure(lines []string) *node.Node {
